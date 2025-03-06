@@ -1,11 +1,13 @@
+import { showLoader } from "./loader.js";
+
 export const fetchData = async (url) => {
-  const req = await fetch(url);
-
-  if (!req.ok) {
-    throw new Error("Something went wrong !");
+  showLoader(true);
+  const res = await fetch(url);
+  if (!res.ok) {
+    showLoader(false);
+    throw new Error("Something went wrong");
   }
-
-  const data = await req.json();
-
+  const data = await res.json();
+  showLoader(false);
   return data;
 };
