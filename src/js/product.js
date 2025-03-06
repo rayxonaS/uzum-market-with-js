@@ -22,7 +22,10 @@ function displayProduct(product) {
     <p class="text-xl font-bold mt-2"><i class="fa-solid fa-star text-yellow-400"></i><i class="fa-solid fa-star text-yellow-400"></i><i class="fa-solid fa-star text-yellow-400"></i><i class="fa-solid fa-star text-yellow-400"></i><i class="fa-solid fa-star text-yellow-400"></i>  ${product.rating}</p>
     <p class="mt-4">${product.description}</p>
     <p class="font-bold text-5xl mt-2 text-center rounded-full border-2 border-blue-400 px-6 py-6 inline-block bg-blue-400 mb-5">${product.brand}</p>
-    <p class="rounded-2xl border-2 border-gray-200 self-end w-96 h-12 text-center justify-center mb-3">$${product.price}</p>
+    <del class="price badge badge-soft badge-secondary text-xl "> $${product.price}</del>
+    <p class="price-with-discount badge badge-primary font-bold text-xl">$${product.discountPercentage}</p>
+    <p class="font-bold text-2xl mb-2 text-center">Delivery: ${product.shippingInformation}</p>
+    
   `;
 }
 
@@ -40,19 +43,25 @@ function showCards({ products }) {
     const title = document.createElement("h2");
     const image = document.createElement("img");
     const rating = document.createElement("p");
+    const reviews = document.createElement("p");
     const text = document.createElement("p");
     const brand = document.createElement("p");
-    const price = document.createElement("p");
+    const price = document.createElement("del");
+    const discount = document.createElement("p");
+    const information = document.createElement("p");
     title.textContent = product.title;
     image.src = product.thumbnail;
     image.alt = product.title;
-    rating.textContent = `Rating:${product.rating}`;
+    rating.textContent = product.rating;
+    reviews.textContent = product.reviews;
     text.textContent = product.description;
     brand.textContent = product.brand;
     price.textContent = product.price;
+    discount.textContent = product.discountPercentage;
+    information.textContent = product.shippingInformation;
     image.classList.add("shadow-lg", "rounded-lg", "w-full", "h-auto");
   });
 
-  card.append(title, image, rating, text, brand, price);
+  card.append(title, image, rating, text, brand, price, discount, information);
   container.appendChild(card);
 }
